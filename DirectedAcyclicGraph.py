@@ -23,7 +23,7 @@ class DirectedAcyclicGraph:
 
 
 
-    def addConnection(self, name1, name2):
+    def addConditionalConnection(self, name1, name2):
         if(not self.nameDict[name2].hasSomewhereInChildren(name1)):
             self.nameDict[name2].parents+=[self.nameDict[name1]]
             self.nameDict[name1].children+=[self.nameDict[name2]]

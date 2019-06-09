@@ -97,16 +97,10 @@ for i in range(0, seats):
     #print(majorities)
     directedGraph=DirectedAcyclicGraph(candidateList)
     for majority in majorities:
-        directedGraph.addConnection(majority[0], majority[1])
+        directedGraph.addConditionalConnection(majority[0], majority[1])
     bigDaddy=directedGraph.findBigDaddy()
     print("WINNER "+str(bigDaddy))
 
     stupid=[a for a in majorities if not bigDaddy in a]
     majorities=stupid
     candidateList.remove(bigDaddy)
-
-
-
-
-
-#find source
