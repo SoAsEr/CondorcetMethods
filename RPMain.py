@@ -103,8 +103,7 @@ for i in range(0, seats):
     bigDaddy=directedGraph.findBigDaddy()
     winners+=[bigDaddy]
 
-    stupid=[a for a in majorities if not bigDaddy in a]
-    majorities=stupid
+    majorities[:]=[a for a in majorities if not bigDaddy in a]
     candidateList.remove(bigDaddy)
 
 print(winners)
