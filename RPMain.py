@@ -3,21 +3,6 @@ from CondorcetMatrix import CondorcetMatrix
 import functools
 from DirectedAcyclicGraph import DirectedAcyclicGraph
 
-#How many winners are we looking for?
-seats=3
-
-votes=[]
-with open('votes.csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    line_count = 0
-    for row in csv_reader:
-        if line_count == 0:
-            line_count += 1
-        else:
-            person = [row[2], row[3], row[4], row[5], row[6]]
-            votes.append(person)
-            line_count += 1
-
 candidateList=[
     "Lucynda Amo",
     "Alessandro Maioli",
@@ -38,6 +23,23 @@ candidateList=[
     "Stosh Omiecinski",
     "Talia Fiester"
 ]
+
+#How many winners are we looking for?
+seats=3
+
+votes=[]
+with open('votes.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    line_count = 0
+    for row in csv_reader:
+        if line_count == 0:
+            line_count += 1
+        else:
+            person = [row[2], row[3], row[4], row[5], row[6]]
+            votes.append(person)
+            line_count += 1
+
+
 
 
 condorcetMatrix=CondorcetMatrix(candidateList)
@@ -99,8 +101,10 @@ for i in range(0, seats):
     for majority in majorities:
         directedGraph.addConditionalConnection(majority[0], majority[1])
     bigDaddy=directedGraph.findBigDaddy()
-    print("WINNER "+str(bigDaddy))
+    winners+=[bigDaddy]
 
     stupid=[a for a in majorities if not bigDaddy in a]
     majorities=stupid
     candidateList.remove(bigDaddy)
+
+print(winners)
